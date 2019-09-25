@@ -1,0 +1,12 @@
+README.md
+setup.py
+custom_form_app.egg-info/PKG-INFO
+custom_form_app.egg-info/SOURCES.txt
+custom_form_app.egg-info/dependency_links.txt
+custom_form_app.egg-info/requires.txt
+custom_form_app.egg-info/top_level.txt
+custom_reg_form/__init__.py
+custom_reg_form/admin.py
+custom_reg_form/forms.py
+custom_reg_form/models.py
+custom_reg_form/tests.py
