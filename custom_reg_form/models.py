@@ -10,7 +10,7 @@ PROMO_CODES = [
     'FREECRYPTO'
 ]
 
-NUM_EPIPH_AWARDED = 5
+NUM_EPIPH_AWARDED = 10
 
 def validate_promo_code(value):
     if value in PROMO_CODES:
