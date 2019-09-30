@@ -40,5 +40,5 @@ class ExtraInfo(models.Model):
             be = BadgrBackend()
             for i in range(NUM_EPIPH_AWARDED):
                 be.award(bc, self.user)
-                sleep(75 / 1000)
-
+                if i < NUM_EPIPH_AWARDED:
+                    sleep(75 / 1000)
