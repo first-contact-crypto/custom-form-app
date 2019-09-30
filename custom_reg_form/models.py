@@ -1,3 +1,4 @@
+from time import sleep
 from django.conf import settings
 from django.db import models
 from badges.models import BadgeClass
@@ -12,12 +13,7 @@ PROMO_CODES = [
 
 NUM_EPIPH_AWARDED = 10
 
-def validate_promo_code(value):
-    if value in PROMO_CODES:
-        bc = BadgeClass.objects.get(badgr_server_slug='CM-sak0wQuCty2BfSEle3A')
-        be = BadgrBackend()
-        for i in len(NUM_EPIPH_AWARDED):
-            be.award(bc, self.user)
+
 
 
 class ExtraInfo(models.Model):
@@ -26,12 +22,23 @@ class ExtraInfo(models.Model):
     The form that wraps this model is in the forms.py file.
     """
     user = models.OneToOneField(USER_MODEL, null=True)
-    promo_code = models.CharField(verbose_name="Promo Code", validators=[validate_promo_code], max_length=25, blank=True, null=True)
+    promo_code = models.CharField(verbose_name="Promo Code", max_length=25, blank=True, null=True)
 
     def __str__(self):
         return self.promo_code
 
     def save(self, force_insert=False, force_update=False):
-        self.promo_code = self.promo_code.strip().upper()
-        super(State, self).save(force_insert, force_update)
+        if self.promo_code:
+            self.promo_code = self.promo_code.strip().upper()
+            self._validate_promo_code(self.promo_code)
+            super(ExtraInfo, self).save(force_insert, force_update)
+
+    def _validate_promo_code(self, value):
+        value = value.upper()
+        if value in PROMO_CODES:
+            bc = BadgeClass.objects.get(badgr_server_slug='CM-sak0wQuCty2BfSEle3A')
+            be = BadgrBackend()
+            for i in len(NUM_EPIPH_AWARDED):
+                be.award(bc, self.user)
+                sleep(100 / 1000)
 
