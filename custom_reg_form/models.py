@@ -38,7 +38,7 @@ class ExtraInfo(models.Model):
         if value in PROMO_CODES:
             bc = BadgeClass.objects.get(badgr_server_slug='CM-sak0wQuCty2BfSEle3A')
             be = BadgrBackend()
-            for i in len(NUM_EPIPH_AWARDED):
+            for i in range(NUM_EPIPH_AWARDED):
                 be.award(bc, self.user)
-                sleep(100 / 1000)
+                sleep(75 / 1000)
 
