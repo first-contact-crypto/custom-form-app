@@ -40,7 +40,7 @@ class ExtraInfo(models.Model):
             super(ExtraInfo, self).save(force_insert, force_update)
 
     def _validate_promo_code(self, value):
-        LOGGER.info("In ExtraInfo::_validate_promo_code.. the value is {}".format(value)
+        LOGGER.info("In ExtraInfo::_validate_promo_code.. the value is {}".format(value))
         value = value.upper()
         if value in PROMO_CODES:
             bc = BadgeClass.objects.get(badgr_server_slug='CM-sak0wQuCty2BfSEle3A')
