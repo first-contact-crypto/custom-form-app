@@ -1,12 +1,18 @@
 from time import sleep
+import logging
 from django.conf import settings
 from django.db import models
 from badges.models import BadgeClass
 from badges.models import BadgeAssertion
 from badges.backends.badgr import BadgrBackend
 
+
+LOGGER = logging.getLogger(__name__)
+
 # Backwards compatible settings.AUTH_USER_MODEL
 USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
+
+
 PROMO_CODES = [
     'FREECRYPTO'
 ]
@@ -34,6 +40,7 @@ class ExtraInfo(models.Model):
             super(ExtraInfo, self).save(force_insert, force_update)
 
     def _validate_promo_code(self, value):
+        LOGGER.info("In ExtraInfo::_validate_promo_code.. the value is {}".format(value)
         value = value.upper()
         if value in PROMO_CODES:
             bc = BadgeClass.objects.get(badgr_server_slug='CM-sak0wQuCty2BfSEle3A')
@@ -41,4 +48,4 @@ class ExtraInfo(models.Model):
             for i in range(NUM_EPIPH_AWARDED):
                 be.award(bc, self.user)
                 if i < NUM_EPIPH_AWARDED:
-                    sleep(75 / 1000)
+                    sleep(10 / 1000)
