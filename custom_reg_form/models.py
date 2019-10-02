@@ -33,6 +33,9 @@ class ExtraInfo(models.Model):
     def __str__(self):
         return self.promo_code
 
+    def __unicode__(self):
+        return self.promo_code
+
     def save(self, force_insert=False, force_update=False):
         if self.promo_code:
             self.promo_code = self.promo_code.strip().upper()
